@@ -1,3 +1,4 @@
+import { StylesProvider, generateClassName } from '@material-ui/core/styles';
 import React from 'react';
 import { BrowserRouter, BrowserRouter as Router } from 'react-router-dom';
 import Header from './components/Header';
@@ -9,13 +10,15 @@ import { MarketingApp } from './components/MarketingApp';
 // here it happens that the container is a react app
 // but if it were another app them using a react component would not work
 
+const generateClassName = createGenerateClassName({ productionPrefix: 'ct' });
+
 export const App = () => {
   return (
-    <BrowserRouter>
-      <div>
+    <StylesProvider generateClassName={generateClassName}>
+      <BrowserRouter>
         <Header />
         <MarketingApp />
-      </div>
-    </BrowserRouter>
+      </BrowserRouter>
+    </StylesProvider>
   );
 };
