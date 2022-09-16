@@ -1,4 +1,6 @@
 import React from 'react';
+import { BrowserRouter, BrowserRouter as Router } from 'react-router-dom';
+import Header from './components/Header';
 import { MarketingApp } from './components/MarketingApp';
 
 // Here instead of importing a react component and using it here
@@ -8,5 +10,12 @@ import { MarketingApp } from './components/MarketingApp';
 // but if it were another app them using a react component would not work
 
 export const App = () => {
-  return <MarketingApp />;
+  return (
+    <BrowserRouter>
+      <div>
+        <Header />
+        <MarketingApp />
+      </div>
+    </BrowserRouter>
+  );
 };
