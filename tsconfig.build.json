@@ -9,7 +9,7 @@
     "noEmitOnError": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "types": ["node"]
+    "types": ["node"],
   },
   "exclude": [
     "node_modules",

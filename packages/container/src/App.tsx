@@ -2,9 +2,11 @@ import {
   StylesProvider,
   createGenerateClassName
 } from '@material-ui/core/styles';
-import React, { useState } from 'react';
 import { RouterProvider } from 'react-router-dom';
-import { ContainerProvider } from './context';
+import { Router } from '@remix-run/router';
+import { Provider } from 'react-redux';
+import 'antd/dist/antd.min.css';
+import { store } from './app/store';
 
 // Here instead of importing a react component and using it here
 // we call the mount function because the idea behind micro FEs
@@ -14,14 +16,16 @@ import { ContainerProvider } from './context';
 
 const generateClassName = createGenerateClassName({ productionPrefix: 'ct' });
 
-export const App = ({ router }) => {
-  const [user, setUser] = useState();
+interface IAppProps {
+  router: Router;
+}
 
+export const App: React.FC<IAppProps> = ({ router }) => {
   return (
     <StylesProvider generateClassName={generateClassName}>
-      <ContainerProvider>
+      <Provider store={store}>
         <RouterProvider router={router} />
-      </ContainerProvider>
+      </Provider>
     </StylesProvider>
   );
 };

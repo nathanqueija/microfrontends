@@ -1,17 +1,18 @@
 import { mount } from 'marketing/MarketingMount';
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { Location } from '@remix-run/router';
 
 export const MarketingApp = () => {
-  const ref = useRef(null);
-  const onParentNavigate = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
+  const onParentNavigate = useRef<OnParentNavigate | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
-    const mountedRemote = mount(ref.current, {
+    const mountedRemote = mount(ref.current!, {
       initialPath: location.pathname,
-      onNavigate: ({ pathname: nextPathname }) => {
+      onNavigate: ({ pathname: nextPathname }: Location) => {
         const { pathname } = location;
         if (pathname !== nextPathname) navigate(nextPathname);
       }

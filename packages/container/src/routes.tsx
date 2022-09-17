@@ -1,6 +1,6 @@
-import React from 'react';
-import { RequireAuth } from './components/Auth';
-import { Layout } from './components/Layout';
+import { RouteObject } from 'react-router-dom';
+import { ProtectedRoute } from './components/Auth';
+import { AppLayout } from './components/Layout';
 import lazy from './lazy';
 
 const MarketingAppLazy = lazy(
@@ -14,10 +14,10 @@ const DashboardAppLazy = lazy(
   'DashboardApp'
 );
 
-export const routes = [
+export const routes: RouteObject[] = [
   {
     path: '/',
-    element: <Layout />,
+    element: <AppLayout />,
     children: [
       { index: true, element: <MarketingAppLazy /> },
       {
@@ -27,9 +27,9 @@ export const routes = [
       {
         path: '/dashboard',
         element: (
-          <RequireAuth>
+          <ProtectedRoute>
             <DashboardAppLazy />
-          </RequireAuth>
+          </ProtectedRoute>
         )
       },
       { path: '/*', element: <MarketingAppLazy /> }

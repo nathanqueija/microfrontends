@@ -19,7 +19,19 @@ const prodConfig = {
         auth: `auth@https://${domain}/auth/latest/remoteEntry.js`,
         dashboard: `dashboard@https://${domain}/dashboard/latest/remoteEntry.js`
       },
-      shared: packageJson.dependencies
+      shared: {
+        ...packageJson.dependencies,
+        react: {
+          singleton: true,
+          eager: true,
+          requiredVersion: packageJson.dependencies.react
+        },
+        'react-dom': {
+          singleton: true,
+          eager: true,
+          requiredVersion: packageJson.dependencies['react-dom']
+        }
+      }
     })
   ]
 };

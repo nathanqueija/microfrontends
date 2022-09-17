@@ -1,26 +1,27 @@
-import { mount } from 'auth/AuthMount';
 import React, { useEffect, useRef } from 'react';
+import { mount } from 'auth/AuthMount';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useContainer } from '../context';
+import * as Auth from '../app/auth';
+import { User } from '../app/auth/types';
+import { Location } from '@remix-run/router';
 
-export const AuthApp = () => {
-  const ref = useRef(null);
-  const onParentNavigate = useRef(null);
+export const AuthApp: React.FC = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const onParentNavigate = useRef<OnParentNavigate | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
-  const context = useContainer();
 
   let from = location.state?.from?.pathname || '/';
 
   useEffect(() => {
-    const mountedRemote = mount(ref.current, {
+    const mountedRemote = mount(ref.current!, {
       initialPath: location.pathname,
-      onNavigate: ({ pathname: nextPathname }) => {
+      onNavigate: ({ pathname: nextPathname }: Location) => {
         const { pathname } = location;
         if (pathname !== nextPathname) navigate(nextPathname);
       },
-      onAuthChange: (user) => {
-        context.setUser(user);
+      onAuthChange: (user: User | null) => {
+        Auth.events.loginRequested(user);
         navigate(from, { replace: true });
       }
     });
@@ -29,7 +30,7 @@ export const AuthApp = () => {
   }, []);
 
   useEffect(() => {
-    onParentNavigate.current?.(location);
+    onParentNavigate?.current?.(location);
   }, [location]);
 
   return <div ref={ref}></div>;

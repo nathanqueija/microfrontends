@@ -1,4 +1,3 @@
-import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, createMemoryRouter } from 'react-router-dom';
 import { buildRoutes, routes } from './routes';

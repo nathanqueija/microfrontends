@@ -5,6 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link as RouterLink } from 'react-router-dom';
+import { User } from '../app/auth/types';
 
 const useStyles = makeStyles((theme) => ({
   '@global': {
@@ -54,7 +55,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Header({ user, onSignOut }) {
+interface IHeaderProps {
+  user: User | null;
+  onSignOut: () => {};
+}
+
+export const Header: React.FC<IHeaderProps> = ({ user, onSignOut }) => {
   const classes = useStyles();
 
   const onClick = () => {
@@ -95,4 +101,4 @@ export default function Header({ user, onSignOut }) {
       </AppBar>
     </React.Fragment>
   );
-}
+};

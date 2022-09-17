@@ -1,20 +1,25 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  entry: './src/index.ts',
+  devtool: 'inline-source-map',
   module: {
     rules: [
       {
-        test: /\.m?js$/,
+        test: /\.css$/i,
+        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }]
+      },
+      {
+        test: /\.(js|jsx|tsx|ts)$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-react', '@babel/preset-env'],
-            plugins: ['@babel/plugin-transform-runtime']
-          }
+          loader: 'ts-loader'
         }
       }
     ]
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js', '.css']
   },
   plugins: [new HtmlWebpackPlugin({ template: './public/index.html' })]
 };
