@@ -6,6 +6,9 @@ import {
 } from '@material-ui/core/styles';
 import { Router } from '@remix-run/router';
 
+import './App.css';
+import 'antd/dist/antd.min.css';
+
 const generateClassName = createGenerateClassName({ productionPrefix: 'dash' });
 
 interface IAppProps {
