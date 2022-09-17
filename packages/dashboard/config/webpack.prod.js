@@ -3,22 +3,17 @@ const commonConfig = require('./webpack.common');
 const { ModuleFederationPlugin } = require('webpack').container;
 const packageJson = require('../package.json');
 
-const domain = process.env.PRODUCTION_DOMAIN;
-
 const prodConfig = {
   mode: 'production',
   output: {
-    publicPath: '/container/latest/',
-    filename: '[name].[contenthash].js'
+    filename: '[name].[contenthash].js',
+    publicPath: '/dashboard/latest/'
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'container',
-      remotes: {
-        marketing: `marketing@https://${domain}/marketing/latest/remoteEntry.js`,
-        auth: `auth@https://${domain}/auth/latest/remoteEntry.js`,
-        dashboard: `dashboard@https://${domain}/dashboard/latest/remoteEntry.js`
-      },
+      name: 'dashboard',
+      filename: 'remoteEntry.js',
+      exposes: { './DashboardMount': './src/bootstrap' },
       shared: packageJson.dependencies
     })
   ]
