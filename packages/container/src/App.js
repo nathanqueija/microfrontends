@@ -2,8 +2,9 @@ import {
   StylesProvider,
   createGenerateClassName
 } from '@material-ui/core/styles';
-import React from 'react';
+import React, { useState } from 'react';
 import { RouterProvider } from 'react-router-dom';
+import { ContainerProvider } from './context';
 
 // Here instead of importing a react component and using it here
 // we call the mount function because the idea behind micro FEs
@@ -14,9 +15,13 @@ import { RouterProvider } from 'react-router-dom';
 const generateClassName = createGenerateClassName({ productionPrefix: 'ct' });
 
 export const App = ({ router }) => {
+  const [user, setUser] = useState();
+
   return (
     <StylesProvider generateClassName={generateClassName}>
-      <RouterProvider router={router} />
+      <ContainerProvider>
+        <RouterProvider router={router} />
+      </ContainerProvider>
     </StylesProvider>
   );
 };

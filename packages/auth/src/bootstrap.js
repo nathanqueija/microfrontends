@@ -1,16 +1,16 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, createMemoryRouter } from 'react-router-dom';
-import { routes } from './routes';
+import { buildRoutes, routes } from './routes';
 import { App } from './App';
 
 export const mount = (
   container,
-  { onNavigate, defaultRouter, initialPath }
+  { onNavigate, defaultRouter, initialPath, onAuthChange }
 ) => {
   const router =
     defaultRouter ||
-    createMemoryRouter(routes, {
+    createMemoryRouter(buildRoutes({ onAuthChange }), {
       initialEntries: [initialPath]
     });
 
@@ -21,7 +21,7 @@ export const mount = (
 
   const root = createRoot(container);
 
-  root.render(<App router={router} />);
+  root.render(<App router={router} onAuthChange={onAuthChange} />);
 
   return {
     onParentNavigate: ({ pathname: nextPathname }) => {

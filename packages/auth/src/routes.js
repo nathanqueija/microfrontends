@@ -9,3 +9,11 @@ export const routes = [
   },
   { path: '/auth/signup', element: <Signup /> }
 ];
+
+export const buildRoutes = ({ onAuthChange }) => [
+  {
+    path: '/auth/signin',
+    element: <Signin onAuthChange={onAuthChange} />
+  },
+  { path: '/auth/signup', element: <Signup onAuthChange={onAuthChange} /> }
+];
