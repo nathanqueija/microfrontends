@@ -3,9 +3,7 @@ import {
   createGenerateClassName
 } from '@material-ui/core/styles';
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import Header from './components/Header';
-import { MarketingApp } from './components/MarketingApp';
+import { RouterProvider } from 'react-router-dom';
 
 // Here instead of importing a react component and using it here
 // we call the mount function because the idea behind micro FEs
@@ -15,13 +13,10 @@ import { MarketingApp } from './components/MarketingApp';
 
 const generateClassName = createGenerateClassName({ productionPrefix: 'ct' });
 
-export const App = () => {
+export const App = ({ router }) => {
   return (
     <StylesProvider generateClassName={generateClassName}>
-      <BrowserRouter>
-        <Header />
-        <MarketingApp />
-      </BrowserRouter>
+      <RouterProvider router={router} />
     </StylesProvider>
   );
 };

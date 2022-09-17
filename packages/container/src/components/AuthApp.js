@@ -1,8 +1,8 @@
-import { mount } from 'marketing/MarketingMount';
+import { mount } from 'auth/AuthMount';
 import React, { useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-export const MarketingApp = () => {
+export const AuthApp = () => {
   const ref = useRef(null);
   const onParentNavigate = useRef(null);
   const navigate = useNavigate();

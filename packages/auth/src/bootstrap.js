@@ -32,7 +32,7 @@ export const mount = (
 };
 
 if (process.env.NODE_ENV === 'development') {
-  const container = document.getElementById('__marketing__root__container__');
+  const container = document.getElementById('__auth__root__container__');
 
   if (container)
     mount(container, { defaultRouter: createBrowserRouter(routes) });
