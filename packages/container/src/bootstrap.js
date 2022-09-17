@@ -4,7 +4,7 @@ import { App } from './App';
 
 const mount = (container) => {
   const root = createRoot(container);
-  root.render(<App tab="home" />);
+  root.render(<App />);
 };
 
 const container = document.getElementById('root');

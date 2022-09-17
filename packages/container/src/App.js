@@ -3,7 +3,7 @@ import {
   createGenerateClassName
 } from '@material-ui/core/styles';
 import React from 'react';
-import { BrowserRouter, BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import Header from './components/Header';
 import { MarketingApp } from './components/MarketingApp';
 
