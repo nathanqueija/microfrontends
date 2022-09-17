@@ -4,10 +4,15 @@ import {
   StylesProvider,
   createGenerateClassName
 } from '@material-ui/core/styles';
+import { Router } from '@remix-run/router';
 
 const generateClassName = createGenerateClassName({ productionPrefix: 'dash' });
 
-export const App = ({ router }) => {
+interface IAppProps {
+  router: Router;
+}
+
+export const App: React.FC<IAppProps> = ({ router }) => {
   return (
     <StylesProvider generateClassName={generateClassName}>
       <RouterProvider router={router} />

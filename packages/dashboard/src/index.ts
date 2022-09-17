@@ -2,3 +2,5 @@
 // fetch dependencies from this app before the bootstrap
 // file is executed
 import('./bootstrap');
+
+export {};
